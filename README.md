@@ -126,6 +126,14 @@ docker build . -t nextjs-starter-shadcn -f Dockerfile.bun
 docker run -p 3000:3000 nextjs-starter-shadcn
 ```
 
+### Deploy from GitHub Actions to Cloudflare Workers
+
+Before deploying code to Cloudflare via CI, you need a Cloudflare token. You can manage it from [User API Tokens](https://dash.cloudflare.com/user/api-tokens).
+
+If it's a newly created token, select the **Edit Cloudflare Workers template**. If you already have another token, make sure the token has the corresponding permissions (No, token permissions are not shared between Cloudflare Pages and Cloudflare Workers).
+
+Then go to your GitHub repository settings dashboard: `Settings->Secrets and variables->Actions->Repository secrets`, and add a new secret with the name `CLOUDFLARE_API_TOKEN`.
+
 ### ☁ Try it in the Cloud
 
 [![Open in VS Code](https://img.shields.io/badge/Open%20in-VS%20Code-blue?logo=visualstudiocode)](https://vscode.dev/github/SiddharthaMaity/nextjs-16-starter-shadcn)
