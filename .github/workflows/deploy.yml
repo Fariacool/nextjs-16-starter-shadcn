@@ -31,9 +31,11 @@ jobs:
         run: pnpm build:opennextjs
 
       - name: Deploy to Cloudflare Workers
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          # accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # Optional: Add command if you want to be explicit, but default 'wrangler deploy' should work
-          # command: deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          # CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          COMMIT_SHA=$(git rev-parse --short HEAD)
+          pnpm wrangler versions upload --message "Commit: ${COMMIT_SHA}"
+          VERSION_ID=$(pnpm wrangler versions list --json | jq -r '.[0].version_id')
+          pnpm wrangler versions deploy ${VERSION_ID} --percentage 100 --yes
