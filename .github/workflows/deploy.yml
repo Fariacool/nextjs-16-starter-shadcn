@@ -35,6 +35,6 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           # Optional: Add command if you want to be explicit, but default 'wrangler deploy' should work
           # command: deploy
