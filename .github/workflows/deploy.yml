@@ -36,8 +36,9 @@ jobs:
           # CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           COMMIT_SHA=$(git rev-parse --short HEAD)
+          COMMIT_MESSAGE=$(git log -1 --format=%s)
           # Capture output to file to extract Version ID while also showing logs
-          pnpm wrangler versions upload --message "Commit: ${COMMIT_SHA}" > upload_output.txt 2>&1
+          pnpm wrangler versions upload --tag "${COMMIT_SHA}" --message "${COMMIT_MESSAGE}" > upload_output.txt 2>&1
           cat upload_output.txt
           VERSION_ID=$(grep "Worker Version ID:" upload_output.txt | awk '{print $4}')
           
