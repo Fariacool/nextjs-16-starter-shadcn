@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next';
 
 import initializeBundleAnalyzer from '@next/bundle-analyzer';
+import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare';
 
 // https://www.npmjs.com/package/@next/bundle-analyzer
 const withBundleAnalyzer = initializeBundleAnalyzer({
@@ -13,3 +14,5 @@ const nextConfig: NextConfig = {
 };
 
 export default withBundleAnalyzer(nextConfig);
+
+initOpenNextCloudflareForDev();
